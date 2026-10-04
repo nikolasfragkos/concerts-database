@@ -1,0 +1,153 @@
+
++------------+------------+-----------+----------+-------------------+--------------------+
+| visitor_id | first_name | last_name | event_id | event_name        | avg_overall_rating |
++------------+------------+-----------+----------+-------------------+--------------------+
+|          1 | Alex       | Johnson   |        4 | Closing Party     |             4.0000 |
+|          1 | Alex       | Johnson   |        7 | Hip Hop Showcase  |             2.0000 |
+|          1 | Alex       | Johnson   |       10 | Tokyo Lights      |             2.6667 |
+|          1 | Alex       | Johnson   |       13 | Electronic Dreams |             3.3333 |
++------------+------------+-----------+----------+-------------------+--------------------+
+4 rows in set (0.004 sec)
+
++------------+------------+-----------+----------+-------------------+--------------------+
+| visitor_id | first_name | last_name | event_id | event_name        | avg_overall_rating |
++------------+------------+-----------+----------+-------------------+--------------------+
+|          1 | Alex       | Johnson   |        4 | Closing Party     |             4.0000 |
+|          1 | Alex       | Johnson   |        7 | Hip Hop Showcase  |             2.0000 |
+|          1 | Alex       | Johnson   |       10 | Tokyo Lights      |             2.6667 |
+|          1 | Alex       | Johnson   |       13 | Electronic Dreams |             3.3333 |
++------------+------------+-----------+----------+-------------------+--------------------+
+4 rows in set (0.001 sec)
+
++------------+------------+-----------+----------+-------------------+--------------------+
+| visitor_id | first_name | last_name | event_id | event_name        | avg_overall_rating |
++------------+------------+-----------+----------+-------------------+--------------------+
+|          1 | Alex       | Johnson   |        4 | Closing Party     |             4.0000 |
+|          1 | Alex       | Johnson   |        7 | Hip Hop Showcase  |             2.0000 |
+|          1 | Alex       | Johnson   |       10 | Tokyo Lights      |             2.6667 |
+|          1 | Alex       | Johnson   |       13 | Electronic Dreams |             3.3333 |
++------------+------------+-----------+----------+-------------------+--------------------+
+4 rows in set (0.001 sec)
+
++------------+------------+-----------+----------+-------------------+--------------------+
+| visitor_id | first_name | last_name | event_id | event_name        | avg_overall_rating |
++------------+------------+-----------+----------+-------------------+--------------------+
+|          1 | Alex       | Johnson   |        4 | Closing Party     |             4.0000 |
+|          1 | Alex       | Johnson   |        7 | Hip Hop Showcase  |             2.0000 |
+|          1 | Alex       | Johnson   |       10 | Tokyo Lights      |             2.6667 |
+|          1 | Alex       | Johnson   |       13 | Electronic Dreams |             3.3333 |
++------------+------------+-----------+----------+-------------------+--------------------+
+4 rows in set (0.001 sec)
+
++----------+------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                                                                                                                                                                                                                                        |
++----------+------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|       45 | 0.00081570 | EXPLAIN
+SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    JOIN Performance p ON e.even |
+|       46 | 0.00014810 | SET SESSION join_cache_level = 6                                                                                                                                                                                                                                                                             |
+|       47 | 0.00015800 | SET SESSION optimizer_switch = 'join_cache_incremental=on,join_cache_hashed=off,join_cache_bka=on'                                                                                                                                                                                                           |
+|       48 | 0.00050330 | EXPLAIN
+SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    JOIN Performance p ON e.even |
+|       49 | 0.00014740 | SET SESSION join_cache_level = 7                                                                                                                                                                                                                                                                             |
+|       50 | 0.00009580 | SET SESSION optimizer_switch = 'join_cache_incremental=off,join_cache_hashed=on,join_cache_bka=on'                                                                                                                                                                                                           |
+|       51 | 0.00129350 | EXPLAIN
+SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    JOIN Performance p ON e.even |
+|       52 | 0.00015120 | SET SESSION join_cache_level = 8                                                                                                                                                                                                                                                                             |
+|       53 | 0.00010510 | SET SESSION optimizer_switch = 'join_cache_incremental=on,join_cache_hashed=on,join_cache_bka=on'                                                                                                                                                                                                            |
+|       54 | 0.00126890 | EXPLAIN
+SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    JOIN Performance p ON e.even |
+|       55 | 0.00023240 | SET profiling = 1                                                                                                                                                                                                                                                                                            |
+|       56 | 0.00366500 | SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    LEFT JOIN Performance p ON e.event_i |
+|       57 | 0.00069690 | SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t FORCE INDEX (idx_ticket_visitor) ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    LEF |
+|       58 | 0.00065060 | SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    LEFT JOIN Performance p ON e.event_id |
+|       59 | 0.00067990 | SELECT
+    v.visitor_id,
+    v.first_name,
+    v.last_name,
+    e.event_id,
+    e.event_name,
+    AVG(r.overall_impression) AS avg_overall_rating
+FROM
+    Visitor v
+    JOIN Ticket t ON v.visitor_id = t.visitor_id
+    JOIN Event e ON t.event_id = e.event_id
+    LEFT JOIN Performance p ON e.event_id |
++----------+------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+15 rows in set (0.000 sec)
